@@ -1,0 +1,63 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>Sensores de Pressão e Consumo</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detalhes do Sensor</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <div class="row">
+          <div class="col-md-1 hidden-sm hidden-xs">
+            <h1 style="text-align: center;">
+              <i class="fa fa-user"></i>
+            </h1>
+          </div>
+          <div class="col-md-11">
+            <h2><%= @sensor.name %></h2>
+            <strong>Token:</strong> <%= @sensor.token %> <br>
+            <strong>Capacidade:</strong> <%= @sensor.capacity %> <br>
+            <strong>Paciente:</strong> <%= @sensor.patient.name %> <br>
+            <strong>Plano de Saúde:</strong> <%= @sensor.patient.health_plan.name %> <br>
+            <strong>Área de Abastecimento:</strong> <%= "#{@sensor.patient.supply_area.number} | #{@sensor.patient.supply_area.name}" %><br>
+            <strong>Nº Atendimento:</strong> <%= @sensor.patient.order_number %><br>
+            <strong>Prescrição O2:</strong> <%= @sensor.patient.o2_prescription %><br>
+            <strong>Período:</strong> <%= @sensor.patient.period %>
+          
+            <br>
+            <br>
+
+            <strong> <%= link_to 'Listagem das Medições de hoje', sensor_pressures_path(@sensor) %> </strong>
+
+            <br>
+            <br>
+
+            <div>
+              <%= link_to(edit_sensor_path(@sensor), class: 'btn btn-sm btn-default') do %>
+                <i class="fa fa-edit"></i> Editar
+              <% end%>
+              <%= link_to(sensor_path(@sensor), class: 'btn btn-sm btn-default', method: :delete, data: { confirm: 'Você tem certeza?' }) do %>
+                <i class="fa fa-trash"></i> Excluir
+              <% end%>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+

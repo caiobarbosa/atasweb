@@ -1,0 +1,53 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>Sensores de Temperatura</h3>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Detalhes do Sensor</h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <div class="row">
+          <div class="col-md-1 hidden-sm hidden-xs">
+            <h1 style="text-align: center;">
+              <i class="fa fa-user"></i>
+            </h1>
+          </div>
+          <div class="col-md-11">
+            <h2><%= @temperature_sensor.name %></h2>
+            <strong>Token:</strong> <%= @temperature_sensor.token %> <br>
+            <strong>Tipo:</strong> <%= @temperature_sensor.sensor_kind %> <br>
+          
+            <br>
+            <br>
+
+            <div>
+              <%= link_to(edit_temperature_sensor_path(@temperature_sensor), class: 'btn btn-sm btn-default') do %>
+                <i class="fa fa-edit"></i> Editar
+              <% end%>
+              <%= link_to(temperature_sensor_path(@temperature_sensor), class: 'btn btn-sm btn-default', method: :delete, data: { confirm: 'Você tem certeza?' }) do %>
+                <i class="fa fa-trash"></i> Excluir
+              <% end%>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+

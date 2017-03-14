@@ -1,0 +1,43 @@
+<div class="patients index">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Sensores de Pressão e Consumo</h3>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_content">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="260px">Data</th>
+                <th>Pressão</th>
+                <th>Consumo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @pressures.each do |pressure| %>
+                <tr>
+                  <th scope="row">
+                    <%= pressure.created_at.strftime('%d/%m/%Y %H:%M:%S') %>
+                  </th>
+                  <td>
+                    <%= pressure.value %> Kgf/cm²
+                  </td>
+                  <td>
+                    <%= pressure.calc_spent %> L/min
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

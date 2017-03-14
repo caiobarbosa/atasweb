@@ -1,0 +1,54 @@
+<div class="patients index">
+  <div class="page-title">
+    <div class="title_left">
+      <h3>Pacientes</h3>
+    </div>
+
+    <div class="title_right">
+      <div class="form-group top_search">
+        <%= link_to new_patient_path, class: 'btn btn-default' do %>
+          <i class="fa fa-plus"></i> Novo Paciente
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="clearfix"></div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel x_index_table">
+        <div class="x_content">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="40px">#</th>
+                <th>Nome</th>
+                <th width="160px">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @patients.each do |patient| %>
+                <tr>
+                  <th scope="row"><%= patient.id %></th>
+                  <td><%= link_to patient.name, patient_path(patient) %></td>
+                  <td>
+                    <%= link_to(edit_patient_path(patient)) do %>
+                      <i class="fa fa-edit"></i> Editar
+                    <% end %>
+                    
+                    -
+
+                    <%= link_to(patient_path(patient), method: :delete, data: { confirm: 'Você tem certeza?' }) do %>
+                      <i class="fa fa-trash"></i> Excluir
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

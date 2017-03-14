@@ -1,0 +1,34 @@
+<%= simple_form_for @temperature_sensor, html: {class: 'form-horizontal form-label-left'} do |f| %>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <label for="name">Nome<span class="required">*</span>
+        </label>
+        <div>
+          <%= f.input :name, label: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="last-name">Token <span class="required">*</span>
+        </label>
+        <div>
+          <%= f.input :token, label: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="middle-name">Tipo de Sensor <span class="required">*</span></label>
+        <div>
+          <%= f.input :sensor_kind, collection: TemperatureSensor.sensor_kinds, label: false, include_blank: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+        </div>
+      </div>
+
+      <div class="form-group x_form_actions">
+        <div>
+          <a class="btn btn-disabled" href="javascript:history.back(-1);">Cancelar</a>
+          <button type="submit" class="btn btn-default">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+

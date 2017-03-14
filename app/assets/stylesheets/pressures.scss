@@ -1,0 +1,28 @@
+// Place all the styles related to the pressures controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.h100 {
+  height: 100px!important;
+}
+
+.progress-legend {
+  position: relative;
+  width: 40px!important;
+  padding: 0;
+  font-size: 12px;
+  &.vertical {
+    .progress-top {position: absolute; top:0; left: 0;}
+    .progress-bottom {position: absolute; bottom:0; left: 0;}
+
+    .progress-bottom, .progress-top {
+      width: 100%;
+      text-align: right;
+    }
+  }
+}
+
+span.time {
+  font-size: 20px;
+  font-weight: 200;
+}

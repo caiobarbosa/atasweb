@@ -1,0 +1,25 @@
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+  <div class="menu_section">
+    <h3>Menu</h3>
+    <ul class="nav side-menu">
+      <li>
+        <%= link_to patients_path  do %>
+          <i class="fa fa-users"></i>Pacientes
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to sensors_path  do %>
+          <i class="fa fa-dashboard"></i>Pressão e Consumo
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to temperature_sensors_path  do %>
+          <i class="fa fa-dashboard"></i>Temperatura e Umidade
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+</div>

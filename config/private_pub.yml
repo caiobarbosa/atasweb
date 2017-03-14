@@ -1,0 +1,12 @@
+development:
+  server: "http://atas.salvus.me:9292/faye"
+  #server: "http://192.168.0.182:9292/faye"
+  secret_token: "secret"
+test:
+  server: "http://localhost:9292/faye"
+  secret_token: "secret"
+production:
+  #server: "http://example.com/faye"
+  server: "http://atas.salvus.me/faye"
+  secret_token: "8a776f5686d8fd28fed51a8090babf80397a5e9d7843681a7034a0aba623aa57"
+  signature_expiration: 3600 # one hour

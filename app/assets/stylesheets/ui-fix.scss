@@ -1,0 +1,31 @@
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+
+    .stage,
+    .container.body,
+    .main_container,
+    [role="main"] {
+      height: 100%;
+    }
+  }
+}
+
+[role="main"].right_col {
+  position: relative;
+}
+
+[role="main"].right_col footer {
+  margin: 0 -20px 0 -20px;
+}
+
+.nav_menu {
+  margin-bottom: 0;
+}
+
+html body [role="main"] {
+  height: calc(100% - 58px);
+  overflow: auto;
+}

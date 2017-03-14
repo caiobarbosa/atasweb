@@ -1,0 +1,75 @@
+<%= simple_form_for @patient, html: {class: 'form-horizontal form-label-left'} do |f| %>
+
+<div class="row">
+  <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+    <div class="form-group">
+      <label for="name">Nome<span class="required">*</span>
+      </label>
+      <div>
+        <%= f.input :name, label: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Plano de Saúde<span class="required">*</span>
+          </label>
+          <div>
+            <%= f.association :health_plan, label: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Área de Abastecimento<span class="required">*</span>
+          </label>
+          <div>
+            <%= f.association :supply_area, label: false, :label_method => lambda { |area| "#{area.number} | #{area.name}" }, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="name">Nº Atendimento<span class="required">*</span>
+          </label>
+          <div>
+            <%= f.input :order_number, label: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="name">Prescrição O2<span class="required">*</span>
+          </label>
+          <div>
+            <%= f.input :o2_prescription, collection: 1..15, label: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="name">Período<span class="required">*</span>
+          </label>
+          <div>
+            <%= f.input :period, as: :select, collection: Patient.periods.map{ |p| [p.first, p.first.humanize] }, label: false, input_html: {class: 'form-control col-md-7 col-xs-12'} %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="x_form_actions">
+        <a class="btn btn-disabled" href="javascript:history.back(-1);">Cancelar</a>
+        <button type="submit" class="btn btn-default">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+

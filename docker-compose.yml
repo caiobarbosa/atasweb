@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  web:
+    build: .
+    container_name: atas
+    command: sh starting.sh
+    volumes:
+      - /home/james/salvusme/atas/:/myapp
+    expose:
+      - "80"
+    ports:
+      - "9292:9292"
+    environment:
+      - VIRTUAL_HOST=atas.salvus.me
+      - SECRET_KEY_BASE="c1ae3b48c17d5373cd4292bb25fd685d078215be76e8a2ea65e28da1bbbeede9d8c9699841e3c729f8f2ea99423dee04df3d4fe179cba648671d439bda54a2ae"
+    external_links:
+      - postgres:db
+    networks:
+      - if01
+
+networks:
+  if01:
+    external: true
+        

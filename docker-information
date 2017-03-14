@@ -1,0 +1,5 @@
+= ATAS DEV
+	- Incializando um container com acesso ao bash [Mode Verbose]
+docker run --name atasdev -e VIRTUAL_HOST=atas.agenciahacker.com.br --expose 80 -v /home/docker-workspace/atas/:/myapp -it atasimg bash
+	- Comando usada para iniciar o APP em producao
+bundle exec rails s -p 80 -b '0.0.0.0' -e production

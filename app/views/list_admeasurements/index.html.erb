@@ -1,0 +1,13 @@
+<h1>Sensores</h1>
+
+<% @sensors.each do |sensor| %>
+  <p>Sensor: <%= sensor.name %></p>
+  <h2>Medições:</h2>
+  <ul>
+  <% sensor.pressures.each do |pressure| %>
+    <li>
+      <%= pressure.value %> - <%= pressure.created_at %>
+    </li>
+  <% end %>
+  </ul>
+<% end %>

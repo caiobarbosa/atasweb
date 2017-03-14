@@ -1,0 +1,76 @@
+<div class="page-title">
+  <div class="title_left">
+    <h3>Sensores de Pressão e Consumo</h3>
+  </div>
+
+  <div class="title_right">
+    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search" style="margin:0">
+      <%= link_to new_sensor_path, class: 'btn btn-default pull-right', style: 'margin:0' do %>
+        <i class="fa fa-plus"></i> Novo sensor
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="row" ng-controller="LineCtrl">
+  <p id="user_id" hidden><%= current_user.id %></p>
+
+  <div class="col-md-4 col-sm-6 col-xs-12" ng-repeat="sensor in sensors | orderBy : 'value'">
+    <div class="x_panel x_index">
+      <div class="x_title">
+        <h2><%= link_to "{{sensor.name}} - {{sensor.capacity}}", URI::unescape(sensor_path("{{sensor.id}}") ) %></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li>
+            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+
+          <li class="dropdown">
+            <%= link_to URI::unescape(edit_sensor_path("{{sensor.id}}")) do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+          </li>
+
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="x_content">
+        <div class="row">
+          <div class="col-md-5 col-sm-5 col-xs-5">
+            <div class="sidebar-widget" style="width: 120px;">
+              <h4>Pressão</h4>
+              <div justgage min="0" max="{{sensor.capacity | capacityCylinder}}" value="{{sensor.value}}" custom-sectors="gageSectors" hide-inner-shadow="true"></div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-3">
+            <div class="sidebar-widget" style="height: 136px;">
+              <h4>Consumo</h4>
+              <ul class="verticle_bars list-inline">
+                <li class="progress-legend vertical h100">
+                  <span class="progress-top">15</span>
+                  <span class="progress-bottom">{{sensor.spent}}</span>
+                </li>
+                <li class="h100">
+                  <div class="progress vertical bottom">
+                    <div class="progress-bar  progress-bar-success" role="progressbar" data-transitiongoal="85" aria-valuenow="85" style="height: {{sensor.spent * 100 / 15}}%;"></div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-3 col-xs-3">
+            <div class="sidebar-widget" style="height: 136px;">
+              <h4>Estimativa</h4>
+              <span class="time">
+                {{sensor.estimate}}
+              </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <%= subscribe_to "/pressures/#{current_user.id}/new" %>
+</div>

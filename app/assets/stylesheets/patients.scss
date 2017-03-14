@@ -1,0 +1,14 @@
+// Place all the styles related to the patients controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.index {
+
+  .top_search {
+    text-align: right;
+    line-height: 40px;
+
+    .btn {
+      margin: 0;
+    }
+  }
+}
