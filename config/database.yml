@@ -22,8 +22,7 @@ default: &default
   host: 52.24.186.186
   port: 5432
   username: postgres
-#  password: <%= ENV["DB_ENV_POSTGRES_PASSWORD"] %>
-  password: 83jh6g39ak10sm 
+  password: <%= ENV["DB_ENV_POSTGRES_PASSWORD"] %>
 
 
 development:
