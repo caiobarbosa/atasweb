@@ -50,7 +50,7 @@ create_task_definition() {
 
   echo $task_definition > /tmp/task_definition.json
 
-  if revision=$(aws ecs register-task-definition --region ECS_REGION --cli-input-json file:///tmp/task_definition.json --family $ECS_TASK_FAMILY | \
+  if revision=$(aws ecs register-task-definition --region $ECS_REGION --cli-input-json file:///tmp/task_definition.json --family $ECS_TASK_FAMILY | \
                 $JQ '.taskDefinition.taskDefinitionArn'); then
     echo "Create new revision of task definition: $revision"
   else
