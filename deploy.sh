@@ -10,6 +10,7 @@ ENVIRONMENT=$1
 VERSION=$2
 
 TAG_SUFFIX=""
+ECS_REGION="us-west-2"
 ECS_CLUSTER="atasweb-production"
 ECS_TASK_FAMILY="$DOCKER_IMAGE-production"
 ECS_SERVICE="$DOCKER_IMAGE-production"
@@ -67,7 +68,7 @@ create_service() {
   
   echo $service > /tmp/service.json
 
-  if [[ $(aws ecs create-service --cluster $ECS_CLUSTER --service-name $ECS_SERVICE --cli-input-json file:///tmp/service.json | \
+  if [[ $(aws ecs create-service --cluster $ECS_CLUSTER --region $ECS_REGION --service-name $ECS_SERVICE --cli-input-json file:///tmp/service.json | \
           $JQ '.service.serviceName') == "$ECS_SERVICE" ]]; then
 	echo "Service created: $ECS_SERVICE"
   else
