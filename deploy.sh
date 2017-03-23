@@ -60,7 +60,7 @@ create_task_definition() {
 
 create_service() {
   service='{
-	"serviceName": "'$ECS_SERVICE'"
+	"serviceName": "'$ECS_SERVICE'",
 	"taskDefinition": "'$ECS_TASK_FAMILY'",
 	"desiredCount": 1
   }'
