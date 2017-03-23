@@ -37,7 +37,7 @@ create_task_definition() {
 	    	"essential": true,
 	    	"memory": 100,
 	    	"cpu": 10,
-	    	"portMappings: [
+	    	"portMappings": [
 		   {
 			"hostPort": 80,
 			"containerPort": 80,
