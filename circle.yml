@@ -12,4 +12,4 @@ deployment:
   prod:
     branch: master
     commands:
-      - ./deploy.sh
+      - ./deploy.sh staging 1
