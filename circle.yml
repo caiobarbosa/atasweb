@@ -7,8 +7,6 @@ machine:
 dependencies:
   pre:
     - gem install bundler
-  post:
-    - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/salvus/atas:2 .
 
 deployment:
   prod:
