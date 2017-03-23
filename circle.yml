@@ -7,6 +7,8 @@ machine:
 dependencies:
   pre:
     - gem install bundler
+  post:
+    - docker build -t $DOCKER_REGISTER/$DOCKER_IMAGE:$CIRCLE_SHA1 .
 
 deployment:
   prod:
