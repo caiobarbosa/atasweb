@@ -29,11 +29,11 @@ deploy_image() {
 
 create_task_definition() {
   task_definition='{	
-	"family": "'$ECS_TASK_FAMILY'"
+	"family": "'$ECS_TASK_FAMILY'",
 	"containerDefinitions": [
 	   {
 	    	"name": "atasweb",
-	    	"image": "$DOKCER_REGISTER/$DOCKER_IMAGE:$CIRCLE_SHA1",
+	    	"image": "'$DOKCER_REGISTER/$DOCKER_IMAGE:$CIRCLE_SHA1'",
 	    	"essential": true,
 	    	"memory": 100,
 	    	"cpu": 10,
