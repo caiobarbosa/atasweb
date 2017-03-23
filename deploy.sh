@@ -79,4 +79,5 @@ create_service() {
 }
 
 deploy_image
+create_task_definition
 create_service
