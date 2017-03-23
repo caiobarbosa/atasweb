@@ -33,7 +33,7 @@ create_task_definition() {
 	"containerDefinitions": [
 	   {
 	    	"name": "atasweb",
-	    	"image": "'$DOKCER_REGISTER/$DOCKER_IMAGE:$CIRCLE_SHA1'",
+	    	"image": "'$DOCKER_REGISTER/$DOCKER_IMAGE:$CIRCLE_SHA1'",
 	    	"essential": true,
 	    	"memory": 100,
 	    	"cpu": 10,
