@@ -23,8 +23,8 @@ fi
 
 deploy_image() {
 	eval $(aws ecr get-login --region us-west-2)
-	docker push $DOCKER_REGISTER/$DOCKER_IMAGE:2
-
+#	docker push $DOCKER_REGISTER/$DOCKER_IMAGE:2
+        docker push 542170686601.dkr.ecr.us-west-2.amazonaws.com/salvus/atas:2
 }
 
 create_task_definition() {
