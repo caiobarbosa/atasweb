@@ -19,10 +19,10 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
-  host: 52.24.186.186
+  host: $POSTGRES
   port: 5432
-  username: postgres
-  password: <%= ENV["DB_ENV_POSTGRES_PASSWORD"] %>
+  username: $USER_POSTGRES
+  password: 
 
 
 development:

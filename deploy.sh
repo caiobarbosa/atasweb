@@ -17,7 +17,7 @@ ECS_SERVICE="$DOCKER_IMAGE-production"
 
 if [ "$ENVIRONMENT" ==  "staging" ]; then
   TAG_SUFFIX="-beta"
-  ECS_CLUSTER="atasweb"
+  ECS_CLUSTER="atasweb-cluster"
   ECS_TASK_FAMILY="atasweb-task-staging"
   ECS_SERVICE="atasweb-service-staging"
 fi
