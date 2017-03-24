@@ -19,9 +19,9 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
-  host: $POSTGRES
+  host: <%= ENV["POSTGRES"] %>
   port: 5432
-  username: $USER_POSTGRES
+  username: <%= ENV["USER_POSTGRES"] %>
   password: 
 
 
