@@ -78,6 +78,95 @@ create_service() {
 
 }
 
+stop_service(){
+ echo "Stop the Service: $ECS_SERVICE"
+
+
+ if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --desired-count 0 | \
+            $JQ ".service.serviceName") == "$ECS_SERVICE" ]]; then
+    for attempt in {1..30}; do
+      if stale=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+                  $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
+        echo "Waiting the service stops: $stale"
+        sleep 5
+      else
+        echo "Service stopped: $ECS_SERVICE"
+        return 0
+      fi
+    done
+
+    echo "Stopping the service $ECS_SERVICE took too long."
+    return 1
+  else
+    echo "Error to stop service: $ECS_SERVICE"
+    return 1
+ fi
+}
+
+start_service() {
+  echo "Start the service: $ECS_SERVICE"
+
+  if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --desired-count 1 | \
+            $JQ ".service.serviceName") == "$ECS_SERVICE" ]]; then
+
+
+    for attempt in {1..30}; do
+      if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+                  $JQ ".services[0].runningCount") == "1" ]]; then
+        echo "Service started: $ECS_SERVICE"
+        return 0
+      else
+        echo "Waiting the service starts..."
+        sleep 5
+      fi
+    done
+
+    echo "Starting the service $ECS_SERVICE took too long."
+    return 1
+  else
+    echo "Error to start service: $ECS_SERVICE"
+    return 1
+  fi
+}
+
+
+restart_service() {
+  if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+            $JQ '.services[0].runningCount') == "0" ]]; then
+    start_service
+  else
+    stop_service
+    start_service
+  fi
+}
+
+update_service() {
+  if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition $revision | \
+            $JQ '.service.taskDefinition') == "$revision" ]]; then
+    echo "Service updated: $revision"
+  else
+    echo "Error to update service: $ECS_SERVICE"
+    return 1
+  fi
+}
+
+create_or_update_service() {
+  if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+            $JQ '.failures | .[] | .reason') == "MISSING" ]]; then
+    create_service
+  else
+    update_service
+    restart_service
+  fi
+}
+
+
+deploy_server() {
+  create_task_definition
+  create_or_update_service
+}
+
+# Deployment
+
 deploy_image
-create_task_definition
-create_service
+deploy_server
