@@ -19,8 +19,8 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
-#  host: <%= ENV["POSTGRES"] %>
-  host: 52.24.186.186
+  host: <%= ENV["POSTGRES"] %>
+#  host: 52.24.186.186
   port: 5432
   username: postgres
   password: 

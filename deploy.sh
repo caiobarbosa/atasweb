@@ -108,8 +108,6 @@ start_service() {
 
   if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --region $ECS_REGION --service $ECS_SERVICE --desired-count 1 | \
             $JQ ".service.serviceName") == "$ECS_SERVICE" ]]; then
-
-
     for attempt in {1..30}; do
       if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECS_REGION --services $ECS_SERVICE | \
                   $JQ ".services[0].runningCount") == "1" ]]; then
