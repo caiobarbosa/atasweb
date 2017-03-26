@@ -82,10 +82,10 @@ stop_service(){
  echo "Stop the Service: $ECS_SERVICE"
 
 
- if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --desired-count 0 | \
+ if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --region $ECS_REGION --service $ECS_SERVICE --desired-count 0 | \
             $JQ ".service.serviceName") == "$ECS_SERVICE" ]]; then
     for attempt in {1..30}; do
-      if stale=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+      if stale=$(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECS_REGION --services $ECS_SERVICE | \
                   $JQ ".services[0].deployments | .[] | select(.taskDefinition != \"$revision\") | .taskDefinition"); then
         echo "Waiting the service stops: $stale"
         sleep 5
@@ -106,12 +106,12 @@ stop_service(){
 start_service() {
   echo "Start the service: $ECS_SERVICE"
 
-  if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --desired-count 1 | \
+  if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --region $ECS_REGION --service $ECS_SERVICE --desired-count 1 | \
             $JQ ".service.serviceName") == "$ECS_SERVICE" ]]; then
 
 
     for attempt in {1..30}; do
-      if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+      if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECS_REGION --services $ECS_SERVICE | \
                   $JQ ".services[0].runningCount") == "1" ]]; then
         echo "Service started: $ECS_SERVICE"
         return 0
@@ -131,7 +131,7 @@ start_service() {
 
 
 restart_service() {
-  if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+  if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECS_REGION --services $ECS_SERVICE | \
             $JQ '.services[0].runningCount') == "0" ]]; then
     start_service
   else
@@ -141,7 +141,7 @@ restart_service() {
 }
 
 update_service() {
-  if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --task-definition $revision | \
+  if [[ $(aws ecs update-service --cluster $ECS_CLUSTER --region $ECS_REGION --service $ECS_SERVICE --task-definition $revision | \
             $JQ '.service.taskDefinition') == "$revision" ]]; then
     echo "Service updated: $revision"
   else
@@ -151,7 +151,7 @@ update_service() {
 }
 
 create_or_update_service() {
-  if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE | \
+  if [[ $(aws ecs describe-services --cluster $ECS_CLUSTER --region $ECS_REGION --services $ECS_SERVICE | \
             $JQ '.failures | .[] | .reason') == "MISSING" ]]; then
     create_service
   else
