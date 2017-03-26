@@ -22,8 +22,8 @@ default: &default
   host: <%= ENV["POSTGRES"] %>
 #  host: 52.24.186.186
   port: 5432
-  username: postgres
-  password: 
+  username: <%= ENV["USER_POSTGRES"] %>
+  password: <%= ENV["PASSWORD_POSTGRES"] %>
 
 
 development:
